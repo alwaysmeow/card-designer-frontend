@@ -16,6 +16,10 @@ module: {
         loader: 'babel-loader',
         },
     },
+    {
+        test: /\.css$/, // правило для обработки файлов CSS
+        use: ['style-loader', 'css-loader'],
+    },
     ],
 },
 plugins: [

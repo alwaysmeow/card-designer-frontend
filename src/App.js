@@ -1,8 +1,9 @@
 import React from 'react';
+import Сropper from './cropper';
 
 const App = () => {
     return (
-        <div>Hello, World!</div>
+        <Сropper/>
     )
 }
 
