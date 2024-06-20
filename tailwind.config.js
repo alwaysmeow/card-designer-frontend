@@ -7,8 +7,13 @@ module.exports = {
     colors: {
       pink: "#ff0078",
     },
+    aspectRatio: {
+      card: '85.6 / 54',
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }
 
