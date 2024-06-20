@@ -4,7 +4,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 function Сropper() {
     const [src, setSrc] = useState(null);
-    const [crop, setCrop] = useState({ aspect: 1 });
+    const [crop, setCrop] = useState();
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
 
     const onCropComplete = (crop) => {
@@ -13,6 +13,7 @@ function Сropper() {
 
     const onCropChange = (crop) => {
         setCrop(crop);
+        console.log(crop);
     };
 
     const onSelectFile = (e) => {
@@ -24,8 +25,7 @@ function Сropper() {
     };
 
     return (
-        <div>
-            <input type="file" accept="image/*" onChange={onSelectFile} />
+        <div className="flex-col justify-center items-center w-3/4 mx-auto p-10 border-2 border-pink rounded-xl ">
             {src && (
             <ReactCrop
                 src={src}
@@ -37,6 +37,7 @@ function Сropper() {
                 <img src = {src}/>
             </ReactCrop>
             )}
+            <input className="color-pink" type="file" accept="image/*" onChange={onSelectFile} />
             {croppedImageUrl && (
                 <img alt="Cropped Image" src={croppedImageUrl} />
             )}

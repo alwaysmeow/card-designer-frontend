@@ -1,5 +1,6 @@
 import React from 'react';
-import Сropper from './cropper';
+import Сropper from './components/cropper';
+import "./css/output.css"
 
 const App = () => {
     return (
