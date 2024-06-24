@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 import ReactCrop from 'react-image-crop';
+import { useDispatch } from 'react-redux';
+
 import 'react-image-crop/dist/ReactCrop.css';
+import { setImage, setCropData } from '../store/cropSlice';
 
 function Сropper() {
     const [src, setSrc] = useState(null);
     const [crop, setCrop] = useState();
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+    
+    const dispatch = useDispatch();
 
     const onCropComplete = (crop) => {
-        // do smth
+        dispatch(setCropData(crop));
     };
 
     const onCropChange = (crop) => {
         setCrop(crop);
-        console.log(crop);
     };
 
     const onSelectFile = (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
-            reader.addEventListener('load', () => setSrc(reader.result));
+            reader.addEventListener('load', () => {
+                setSrc(reader.result);
+                dispatch(setImage(reader.result));
+            });
             reader.readAsDataURL(e.target.files[0]);
         }
     };
@@ -40,9 +46,6 @@ function Сropper() {
                 )}
             </div>
             <input className="color-pink" type="file" accept="image/*" onChange={onSelectFile} />
-            {croppedImageUrl && (
-                <img alt="Cropped Image" src={croppedImageUrl} />
-            )}
         </div>
     );
 }
