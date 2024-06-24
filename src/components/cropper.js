@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactCrop from 'react-image-crop';
 import { useDispatch } from 'react-redux';
 
@@ -11,8 +11,18 @@ function Сropper() {
     
     const dispatch = useDispatch();
 
-    const onCropComplete = (crop) => {
-        dispatch(setCropData(crop));
+    const onCropComplete = (crop, percentCrop) => {
+        const image = new Image()
+        image.src = src
+        image.onload = () => {
+            const cropData = {
+                x: image.width * percentCrop.x / 100,
+                y: image.height * percentCrop.y / 100,
+                width: image.width * percentCrop.width / 100,
+                height: image.height * percentCrop.height / 100
+            }
+            dispatch(setCropData(cropData));
+        }
     };
 
     const onCropChange = (crop) => {
@@ -20,6 +30,7 @@ function Сropper() {
     };
 
     const onSelectFile = (e) => {
+        setCrop(null);
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () => {
@@ -35,7 +46,6 @@ function Сropper() {
             <div className="flex justify-center items-center aspect-card border-2 border-black mb-5">
                 {src && (
                 <ReactCrop
-                    src={src}
                     crop={crop}
                     aspect={85.6/54}
                     onComplete={onCropComplete}

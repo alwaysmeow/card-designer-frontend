@@ -10,11 +10,8 @@ function DemoCard () {
     
     useEffect(() => {
         crop(image, cropData)
-        .then((url) => {
-            setSrc(url);
-            console.log(url);
-        })
-        .catch(() => {})
+        .then((url) => { setSrc(url) })
+        .catch(() => { console.log('err'); })
     })
 
     return (

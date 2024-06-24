@@ -14,7 +14,7 @@ function crop(src, data) {
             
                 ctx.drawImage(
                     image,
-                    data.y, data.x, data.width, data.height,
+                    data.x, data.y, data.width, data.height,
                     0, 0, data.width, data.height
                 );
             
@@ -26,7 +26,7 @@ function crop(src, data) {
             };
         }
         else
-            reject();
+            resolve(null);
     })
 }
 
