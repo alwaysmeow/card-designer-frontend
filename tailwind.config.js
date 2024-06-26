@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     colors: {
       pink: "#ff0078",
+      grey: "#f3f4f4",
     },
     aspectRatio: {
       card: '85.6 / 54',

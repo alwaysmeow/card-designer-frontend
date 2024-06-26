@@ -12,8 +12,8 @@ function Сropper() {
     const dispatch = useDispatch();
 
     const onCropComplete = (crop, percentCrop) => {
-        const image = new Image()
-        image.src = src
+        const image = new Image();
+        image.src = src;
         image.onload = () => {
             const cropData = {
                 x: image.width * percentCrop.x / 100,
@@ -42,17 +42,17 @@ function Сropper() {
     };
 
     return (
-        <div className="flex-col justify-center items-center gap-1 w-96 mx-auto p-5 border-2 border-pink rounded-xl">
-            <div className="flex justify-center items-center aspect-card border-2 border-black mb-5">
+        <div className="flex flex-col items-center justify-center gap-5 mx-auto">
+            <div className="flex items-center justify-center w-96 aspect-card bg-grey rounded-xl">
                 {src && (
-                <ReactCrop
-                    crop={crop}
-                    aspect={85.6/54}
-                    onComplete={onCropComplete}
-                    onChange={onCropChange}
-                >
-                    <img src = {src}/>
-                </ReactCrop>
+                    <ReactCrop
+                        crop={crop}
+                        aspect={85.6/54}
+                        onComplete={onCropComplete}
+                        onChange={onCropChange}
+                    >
+                        <img src = {src}/>
+                    </ReactCrop>
                 )}
             </div>
             <input className="color-pink" type="file" accept="image/*" onChange={onSelectFile} />
