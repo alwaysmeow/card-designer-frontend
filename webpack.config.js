@@ -20,6 +20,10 @@ module: {
         test: /\.css$/, // правило для обработки файлов CSS
         use: ['style-loader', 'css-loader'],
     },
+    {
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    },
     ],
 },
 plugins: [

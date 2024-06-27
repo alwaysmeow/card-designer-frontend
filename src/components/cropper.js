@@ -72,7 +72,7 @@ function Сropper() {
                 )}
             </div>
             <div className='flex gap-2 w-96 max-h-8'>
-                <label for="file-upload" className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full">
+                <label htmlFor="file-upload" className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full">
                     Выбрать файл
                 </label>
                 <label className='p-1 truncate'>
