@@ -9,6 +9,7 @@ function Сropper() {
     const [src, setSrc] = useState(null);
     const [crop, setCrop] = useState();
     const [srcAspect, setSrcAspect] = useState()
+    const [filename, setFilename] = useState('')
     
     const dispatch = useDispatch();
 
@@ -37,6 +38,7 @@ function Сropper() {
             const reader = new FileReader();
             reader.addEventListener('load', () => {
                 setSrc(reader.result);
+                setFilename(e.target.files[0].name)
                 dispatch(setImage(reader.result));
                 const img = new Image();
                 img.onload = () => {
@@ -52,7 +54,7 @@ function Сropper() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center gap-5 mx-auto">
+        <div className="flex flex-col items-center justify-center gap-5 max-w-min">
             <div className="flex items-center justify-center overflow-hidden w-96 h-96 bg-grey border-2 border-pink rounded-xl">
                 {src && (
                     <div className='flex max-h-full'
@@ -69,7 +71,15 @@ function Сropper() {
                     </div>
                 )}
             </div>
-            <input className="color-pink" type="file" accept="image/*" onChange={onSelectFile} />
+            <div className='flex gap-2 w-96 max-h-8'>
+                <label for="file-upload" className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full">
+                    Выбрать файл
+                </label>
+                <label className='p-1 truncate'>
+                    {filename}
+                </label>
+            </div>
+            <input id="file-upload" className="hidden" type="file" accept="image/*" onChange={onSelectFile} />
         </div>
     );
 }
