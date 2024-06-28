@@ -8,12 +8,14 @@ import MirLogo from '../img/mir-logo.svg'
 function DemoCard () {
     const image = useSelector((state) => state.crop.image)
     const cropData = useSelector((state) => state.crop.cropData)
+    const bankLogoSide = useSelector((state) => state.template.bankLogoSide)
     const [src, setSrc] = useState(null)
     
     useEffect(() => {
         crop(image, cropData)
         .then((url) => { setSrc(url) })
         .catch(() => { console.log('err'); })
+        console.log(bankLogoSide);
     })
 
     return (
@@ -25,7 +27,7 @@ function DemoCard () {
              } : {}}
         >
             <div className="h-1/2 relative">
-                <div className='flex h-1/2 max-w-min bg-none rounded-br-xl absolute left-0'>
+                <div className={`flex h-1/2 max-w-min bg-none rounded-br-xl absolute ${bankLogoSide === 'right' ? 'right' : 'left'}-0`}>
                     <BankMiniLogo className='fill-current text-pink' height='100%'/>
                     <BankName className='fill-current text-white'    height='100%'/>
                 </div>
