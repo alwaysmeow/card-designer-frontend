@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import crop from '../tools/crop';
 import BankMiniLogo from '../img/bank-letter.svg';
 import BankName from '../img/bank-name.svg';
+import MirLogo from '../img/mir-logo.svg'
 
 function DemoCard () {
     const image = useSelector((state) => state.crop.image)
@@ -23,16 +24,17 @@ function DemoCard () {
                 backgroundPosition: 'center',
              } : {}}
         >
-            <div className="h-1/2">
-                <div className='flex h-1/2 max-w-min bg-dark rounded-br-xl'>
+            <div className="h-1/2 relative">
+                <div className='flex h-1/2 max-w-min bg-none rounded-br-xl absolute left-0'>
                     <BankMiniLogo className='fill-current text-pink' height='100%'/>
-                    <BankName className='fill-current text-white' height='100%'/>
+                    <BankName className='fill-current text-white'    height='100%'/>
                 </div>
             </div>
-            <div className="text-lg font-mono font-medium h-1/2 px-5">
+            <div className="relative text-lg font-mono font-medium h-1/2 px-5">
                 <div className="text-center text-2xl tracking-widest mb-4">1234 5678 9012 3456</div>
                 <div className="text-center">07/25</div>
                 <div className="ml-2 mb-2">JOHN DOE</div>
+                <MirLogo className="h-1/3 absolute bottom-0 right-0 m-3"></MirLogo>
             </div>
         </div>
     )
