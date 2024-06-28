@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import crop from '../tools/crop';
-import BankMiniLogo from '../img/bank-letter.svg';
+import BankMiniLogo from '../img/bank-minilogo.svg'
+import BankLetter from '../img/bank-letter.svg';
 import BankName from '../img/bank-name.svg';
 import MirLogo from '../img/mir-logo.svg'
 
@@ -9,13 +10,13 @@ function DemoCard () {
     const image = useSelector((state) => state.crop.image)
     const cropData = useSelector((state) => state.crop.cropData)
     const bankLogoSide = useSelector((state) => state.template.bankLogoSide)
+    const bankLogoMinimal = useSelector((state) => state.template.bankLogoMinimal)
     const [src, setSrc] = useState(null)
     
     useEffect(() => {
         crop(image, cropData)
         .then((url) => { setSrc(url) })
         .catch(() => { console.log('err'); })
-        console.log(bankLogoSide);
     })
 
     return (
@@ -27,9 +28,16 @@ function DemoCard () {
              } : {}}
         >
             <div className="h-1/2 relative">
-                <div className={`flex h-1/2 max-w-min bg-none rounded-br-xl absolute ${bankLogoSide === 'right' ? 'right' : 'left'}-0`}>
-                    <BankMiniLogo className='fill-current text-pink' height='100%'/>
-                    <BankName className='fill-current text-white'    height='100%'/>
+                <div className={`flex h-1/2 max-w-min bg-none rounded-${bankLogoSide === 'right' ? 'bl' : 'br'}-xl absolute ${bankLogoSide === 'right' ? 'right' : 'left'}-0`}>
+                    {
+                        bankLogoMinimal ?
+                            <BankMiniLogo className='fill-current text-pink'/>
+                        :
+                            <>
+                                <BankLetter className='fill-current text-pink' height='100%'/>
+                                <BankName className='fill-current text-white'    height='100%'/>
+                            </>
+                    }
                 </div>
             </div>
             <div className="relative text-lg font-mono font-medium h-1/2 px-5">
