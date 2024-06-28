@@ -23,7 +23,6 @@ function Сropper() {
                 width: srcAspect.width * percentCrop.width / 100,
                 height: srcAspect.height * percentCrop.height / 100
             }
-            console.log(srcAspect);
             dispatch(setCropData(cropData));
         }
     };
@@ -40,6 +39,7 @@ function Сropper() {
                 setSrc(reader.result);
                 setFilename(e.target.files[0].name)
                 dispatch(setImage(reader.result));
+                dispatch(setCropData(null))
                 const img = new Image();
                 img.onload = () => {
                     setSrcAspect({

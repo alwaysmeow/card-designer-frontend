@@ -17,7 +17,7 @@ function DemoCard () {
         crop(image, cropData)
         .then((url) => { setSrc(url) })
         .catch(() => { console.log('err'); })
-    })
+    }, [image, cropData])
 
     return (
         <div className="flex-col aspect-card justify-between w-96 mx-auto border-2 border-black rounded-xl overflow-hidden"
@@ -35,7 +35,7 @@ function DemoCard () {
                         :
                             <>
                                 <BankLetter className='fill-current text-pink' height='100%'/>
-                                <BankName className='fill-current text-white'    height='100%'/>
+                                <BankName className='fill-current text-dark'    height='100%'/>
                             </>
                     }
                 </div>
