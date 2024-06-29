@@ -4,13 +4,16 @@ import crop from '../tools/crop';
 import BankMiniLogo from '../img/bank-minilogo.svg'
 import BankLetter from '../img/bank-letter.svg';
 import BankName from '../img/bank-name.svg';
-import MirLogo from '../img/mir-logo.svg'
+import MirLogo from '../img/mir-logo.svg';
+import MirMonoLogo from '../img/mir-logo-mono.svg';
 
 function DemoCard () {
     const image = useSelector((state) => state.crop.image)
     const cropData = useSelector((state) => state.crop.cropData)
     const bankLogoSide = useSelector((state) => state.template.bankLogoSide)
     const bankLogoMinimal = useSelector((state) => state.template.bankLogoMinimal)
+    const bankLogoColors = useSelector((state) => state.template.bankLogoColors)
+    const mirLogoColors = useSelector((state) => state.template.mirLogoColors)
     const [src, setSrc] = useState(null)
     
     useEffect(() => {
@@ -18,6 +21,10 @@ function DemoCard () {
         .then((url) => { setSrc(url) })
         .catch(() => { console.log('err'); })
     }, [image, cropData])
+
+    useEffect(() => {
+        console.log(mirLogoColors);
+    }, [mirLogoColors])
 
     return (
         <div className="flex-col aspect-card justify-between w-96 mx-auto border-2 border-black rounded-xl overflow-hidden"
@@ -28,14 +35,14 @@ function DemoCard () {
              } : {}}
         >
             <div className="h-1/2 relative">
-                <div className={`flex h-1/2 max-w-min bg-none rounded-${bankLogoSide === 'right' ? 'bl' : 'br'}-xl absolute ${bankLogoSide === 'right' ? 'right' : 'left'}-0`}>
+                <div className={`flex h-1/2 p-1 max-w-min bg-${bankLogoColors.bg} rounded-${bankLogoSide === 'right' ? 'bl' : 'br'}-xl absolute ${bankLogoSide === 'right' ? 'right' : 'left'}-0`}>
                     {
                         bankLogoMinimal ?
-                            <BankMiniLogo className='fill-current text-pink'/>
+                            <BankMiniLogo className={`fill-current text-${bankLogoColors.letter}`}/>
                         :
                             <>
-                                <BankLetter className='fill-current text-pink' height='100%'/>
-                                <BankName className='fill-current text-dark'    height='100%'/>
+                                <BankLetter className={`fill-current text-${bankLogoColors.letter}`} height='100%'/>
+                                <BankName className={`fill-current text-${bankLogoColors.text}`} height='100%'/>
                             </>
                     }
                 </div>
@@ -44,7 +51,14 @@ function DemoCard () {
                 <div className="text-center text-2xl tracking-widest mb-4">1234 5678 9012 3456</div>
                 <div className="text-center">07/25</div>
                 <div className="ml-2 mb-2">JOHN DOE</div>
-                <MirLogo className="h-1/3 absolute bottom-0 right-0 m-3"></MirLogo>
+                <div className={`h-1/2 absolute bottom-0 right-0 p-3 max-w-min rounded-tl-xl bg-${mirLogoColors.bg}`}>
+                {
+                    mirLogoColors.main == 'default' ?
+                        <MirLogo className="h-full"/>
+                    :
+                        <MirMonoLogo className={`h-full fill-current text-${mirLogoColors.main}`}/>
+                }
+                </div>
             </div>
         </div>
     )

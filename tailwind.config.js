@@ -4,6 +4,16 @@ module.exports = {
     './src/**/*.js',
     './public/index.html'
   ],
+  safelist: [
+    'bg-pink',
+    'bg-white',
+    'bg-dark',
+    'text-pink',
+    'text-white',
+    'text-dark',
+    'rounded-br-xl',
+    'rounded-bl-xl',
+  ],
   theme: {
     fill: {
       current: 'currentColor',
@@ -23,4 +33,3 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
   ],
 }
-

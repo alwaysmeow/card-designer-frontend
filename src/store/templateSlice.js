@@ -10,7 +10,10 @@ const templateSlice = createSlice({
             letter: 'pink',
             text: 'dark',
         },
-        mirLogoColor: "default"
+        mirLogoColors: {
+            main: "default",
+            bg: "none",
+        }
     },
     reducers: {
         switchBankLogoSide: (state) => {
@@ -26,12 +29,12 @@ const templateSlice = createSlice({
         setBankLogoColors: (state, action) => {
             state.bankLogoColors = action.payload;
         },
-        setMirLogoColor: (state, action) => {
-            state.mirLogoColor = action.payload;
+        setMirLogoColors: (state, action) => {
+            state.mirLogoColors = action.payload;
         }
     },
 });
 
-export const { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColor } = templateSlice.actions;
+export const { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColors } = templateSlice.actions;
 
 export default templateSlice.reducer;
