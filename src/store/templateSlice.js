@@ -13,7 +13,7 @@ const templateSlice = createSlice({
         mirLogoColors: {
             main: "default",
             bg: "none",
-        }
+        },
     },
     reducers: {
         switchBankLogoSide: (state) => {

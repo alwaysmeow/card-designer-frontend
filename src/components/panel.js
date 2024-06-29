@@ -1,89 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColors } from '../store/templateSlice'
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColors } from '../store/templateSlice';
+import colors from "../tools/colors";
+import prepareData from "../tools/prepareData";
+import { sendDesignData } from '../tools/requests'
 
 function Panel() {
     const dispatch = useDispatch();
+    const bankLogoSide = useSelector((state) => state.template.bankLogoSide);
     const bankLogoMinimal = useSelector((state) => state.template.bankLogoMinimal);
+    const bankLogoColors = useSelector((state) => state.template.bankLogoColors);
+    const mirLogoColors = useSelector((state) => state.template.mirLogoColors);
     const [colorset, setColorset] = useState(0);
-
-    const colors = {
-        full: [
-            {
-                bg: 'none',
-                letter: 'pink',
-                text: 'dark',
-            },
-            {
-                bg: 'none',
-                letter: 'pink',
-                text: 'white',
-            },
-            {
-                bg: 'white',
-                letter: 'pink',
-                text: 'dark',
-            },
-            {
-                bg: 'dark',
-                letter: 'pink',
-                text: 'white',
-            },
-            {
-                bg: 'pink',
-                letter: 'white',
-                text: 'white',
-            },
-        ],
-        minimal: [
-            {
-                bg: 'none',
-                letter: 'pink',
-                text: 'none',
-            },
-            {
-                bg: 'white',
-                letter: 'pink',
-                text: 'none',
-            },
-            {
-                bg: 'dark',
-                letter: 'pink',
-                text: 'none',
-            },
-            {
-                bg: 'pink',
-                letter: 'white',
-                text: 'none',
-            },
-        ],
-        system: [
-            {
-                main: "default",
-                bg: "none",
-            },
-            {
-                main: "default",
-                bg: "white",
-            },
-            {
-                main: "dark",
-                bg: "none",
-            },
-            {
-                main: "white",
-                bg: "none",
-            },
-            {
-                main: "dark",
-                bg: "white",
-            },
-            {
-                main: "white",
-                bg: "dark",
-            },
-        ]
-    }
+    const cropData = useSelector((state) => state.crop.cropData)
+    const image = useSelector((state) => state.crop.image)
 
     const onSideChange = () => {
         dispatch(switchBankLogoSide());
@@ -111,6 +41,17 @@ function Panel() {
     const onMirColorsChange = (event) => {
         const optionIndex = event.target.options[event.target.selectedIndex].index;
         dispatch(setMirLogoColors(colors.system[optionIndex]));
+    }
+
+    const onReady = () => {
+        const data = prepareData(
+            cropData, 
+            bankLogoColors, 
+            mirLogoColors, 
+            bankLogoMinimal, 
+            bankLogoSide
+        );
+        sendDesignData(image, data);
     }
 
     return (
@@ -150,7 +91,9 @@ function Panel() {
                     }
                 </select>
             </div>
-            <button className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full hover:bg-opacity-80">
+            <button className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full hover:bg-opacity-80"
+                onClick={onReady}
+            >
                 Готово
             </button>
         </div>

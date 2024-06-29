@@ -22,10 +22,6 @@ function DemoCard () {
         .catch(() => { console.log('err'); })
     }, [image, cropData])
 
-    useEffect(() => {
-        console.log(mirLogoColors);
-    }, [mirLogoColors])
-
     return (
         <div className="flex-col aspect-card justify-between w-96 mx-auto border-2 border-black rounded-xl overflow-hidden"
             style={src ? {
