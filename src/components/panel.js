@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColors } from '../store/templateSlice';
+import { setStatus } from "../store/statusSlice";
 import colors from "../tools/colors";
 import prepareData from "../tools/prepareData";
 import { sendDesignData } from '../tools/requests'
 
 function Panel() {
     const dispatch = useDispatch();
+
     const bankLogoSide = useSelector((state) => state.template.bankLogoSide);
     const bankLogoMinimal = useSelector((state) => state.template.bankLogoMinimal);
     const bankLogoColors = useSelector((state) => state.template.bankLogoColors);
     const mirLogoColors = useSelector((state) => state.template.mirLogoColors);
-    const [colorset, setColorset] = useState(0);
+
     const cropData = useSelector((state) => state.crop.cropData)
     const image = useSelector((state) => state.crop.image)
+
+    const [colorset, setColorset] = useState(0);
 
     const onSideChange = () => {
         dispatch(switchBankLogoSide());
@@ -51,6 +55,7 @@ function Panel() {
             bankLogoMinimal, 
             bankLogoSide
         );
+        dispatch(setStatus("waiting"))
         sendDesignData(image, data);
     }
 
