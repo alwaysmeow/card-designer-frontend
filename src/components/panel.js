@@ -64,6 +64,9 @@ function Panel() {
                 dispatch(setStatus('failure'));
             console.log(response);
         })
+        .catch(() => {
+            dispatch(setStatus('error'));
+        })
     }
 
     return (
