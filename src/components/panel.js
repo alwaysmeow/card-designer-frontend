@@ -56,7 +56,13 @@ function Panel() {
             bankLogoSide
         );
         dispatch(setStatus("waiting"))
-        sendDesignData(image, data);
+        sendDesignData(image, data)
+        .then((response) => {
+            console.log(response);
+            setTimeout(() => {
+                dispatch(setStatus('success'));
+            }, 1000)
+        })
     }
 
     return (
