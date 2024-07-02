@@ -58,10 +58,11 @@ function Panel() {
         dispatch(setStatus("waiting"))
         sendDesignData(image, data)
         .then((response) => {
-            console.log(response);
-            setTimeout(() => {
+            if (response.status == 200)
                 dispatch(setStatus('success'));
-            }, 1000)
+            else
+                dispatch(setStatus('failure'));
+            console.log(response);
         })
     }
 

@@ -9,7 +9,8 @@ function StatusOverlay() {
     const status = useSelector((state) => state.status.status);
 
     const onClick = () => {
-        dispatch(setStatus("designing"));
+        if (status !== "waiting")
+            dispatch(setStatus("designing"));
     }
 
     if (status === "designing")
@@ -17,12 +18,12 @@ function StatusOverlay() {
     else
         return (
             <div className="flex flex-col justify-center items-center absolute top-0 h-full w-full bg-white bg-opacity-90" onClick={onClick}>
-                <div className="flex justify-center items-center h-16 w-16 m-8">
+                <div className="flex justify-center items-center h-16 w-16 m-4">
                     {
                         status === "waiting" ?
-                            <Puff color='#323e48' secondaryColor="#7f868d" height='100%' width='100%'/>
+                            <Puff color='#5F656A' height='100%' width='100%'/>
                         : status === "success" ?
-                            <FaCheckCircle color="#7fe456" className="h-full w-full"/>
+                            <FaCheckCircle color="#6AE039" className="h-full w-full"/>
                         :
                             <FaTimesCircle color="#f45b6d" className="h-full w-full"/>
                     }
@@ -30,7 +31,7 @@ function StatusOverlay() {
                 <div className="text-dark">
                     { 
                         status === "waiting" ?
-                            "Ожидание"
+                            "Валидация"
                         : status === "success" ?
                             "Дизайн карты принят"
                         :

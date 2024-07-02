@@ -11,7 +11,7 @@ import './css/output.css';
 const App = () => {
     return (
         <Provider store={store}>
-            <div className='h-full w-full relative'>
+            <div className='h-full w-full relative select-none'>
                 <div className='flex flex-row justify-center items-center gap-5 p-5'>
                     <Сropper/>
                     <div className='flex items-center'>
