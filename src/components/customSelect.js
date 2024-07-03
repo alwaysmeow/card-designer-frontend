@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-function CustomSelect({ options, onSelect })
+function CustomSelect({ options, onSelect, onChange })
 {
     const [focus, setFocus] = useState(false);
     const [selected, setSelect] = useState(0);
@@ -26,10 +26,15 @@ function CustomSelect({ options, onSelect })
     if (onSelect == null)
         onSelect = () => {};
 
+    if (onChange == null)
+        onChange = () => {};
+
     const handleSelect = (event) => {
+        onSelect(event);
+        if (event.target.getAttribute('index') != selected)
+            onChange(event);
         setSelect(Number(event.target.getAttribute('index')));
         setFocus(false);
-        onSelect(event);
     }
 
     const scrollTo = (position) => {
@@ -39,7 +44,9 @@ function CustomSelect({ options, onSelect })
 
     const autoScroll = () => {
         const tranlate = selected < 2 ? 0 : selected + 1 === options.length ? selected : selected - 1
-        scrollTo(tranlate * 1.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
+        const position = tranlate * 1.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        if (scrollRef.current)
+            scrollRef.current.scrollTop = position;
     }
 
     return (
@@ -47,7 +54,7 @@ function CustomSelect({ options, onSelect })
             {
                 focus ?
                     <div 
-                        className={`flex flex-col overflow-scroll h-18 rounded-md -translate-y-${selected === 0 ? 0 : selected + 1 === options.length ? 12 : 6}`}
+                        className={`flex flex-col overflow-scroll h-${options.length > 2 ? 18 : 12 } rounded-md -translate-y-${selected === 0 ? 0 : selected + 1 === options.length && options.length > 2 ? 12 : 6}`}
                         ref={scrollRef}
                     >
                         {

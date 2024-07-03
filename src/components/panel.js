@@ -40,13 +40,12 @@ function Panel() {
 
     const onBankColorsChange = (event) => {
         const newColorset = event.target.getAttribute('index');
-        console.log(newColorset);
-        // setColorset(newColorset);
-        // dispatchBankColors(newColorset);
+        setColorset(newColorset);
+        dispatchBankColors(newColorset);
     }
 
     const onMirColorsChange = (event) => {
-        const optionIndex = event.target.options[event.target.selectedIndex].index;
+        const optionIndex = event.target.getAttribute('index');
         dispatch(setMirLogoColors(colors.system[optionIndex]));
     }
 
@@ -76,10 +75,10 @@ function Panel() {
         <div className="flex justify-center gap-5 bg-grey p-5 text-dark h-40">
             <div className="gap-3">
                 <div>Положение логотипа</div>
-                <select onChange={onSideChange}>
-                    <option>Слева</option>
-                    <option>Справа</option>
-                </select>
+                <CustomSelect 
+                    options={['Слева', 'Cправа']}
+                    onChange={onSideChange}
+                />
             </div>
             <div className="gap-3">
                 <div>Минимизация</div>
@@ -94,13 +93,10 @@ function Panel() {
             </div>
             <div className="gap-3">
                 <div>Банковская система</div>
-                <select onChange={onMirColorsChange}>
-                    {
-                        colors.system.map((item, index) => {
-                            return <option key={index} index={index}>{index + 1}</option>
-                        })
-                    }
-                </select>
+                <CustomSelect 
+                    options={colors.system} 
+                    onSelect={onMirColorsChange}
+                />
             </div>
             <button className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full hover:bg-opacity-80"
                 onClick={onReady}
