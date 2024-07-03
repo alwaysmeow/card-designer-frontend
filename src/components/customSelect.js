@@ -6,6 +6,7 @@ function CustomSelect({ options, onSelect })
     const [focus, setFocus] = useState(false);
     const [selected, setSelect] = useState(0);
     const containerRef = useRef(null);
+    const scrollRef = useRef(null);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -14,7 +15,10 @@ function CustomSelect({ options, onSelect })
         };
 
         if (focus)
+        {
             document.addEventListener('mousedown', handleClickOutside);
+            autoScroll();
+        }
         else
             document.removeEventListener('mousedown', handleClickOutside);
     }, [focus]);
@@ -28,14 +32,24 @@ function CustomSelect({ options, onSelect })
         onSelect(event);
     }
 
+    const scrollTo = (position) => {
+        if (scrollRef.current)
+            scrollRef.current.scrollTop = position
+    }
+
+    const autoScroll = () => {
+        const tranlate = selected < 2 ? 0 : selected + 1 === options.length ? selected : selected - 1
+        scrollTo(tranlate * 1.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
+    }
+
     return (
         <div className="bg-white h-6 rounded-md text-dark overflow-visible" ref={containerRef}>
             {
                 focus ?
                     <div 
-                        className={`overflow-scroll h-18 rounded-md -translate-y-${selected === 0 ? 0 : selected + 1 === options.length ? 12 : 6}`}
+                        className={`flex flex-col overflow-scroll h-18 rounded-md -translate-y-${selected === 0 ? 0 : selected + 1 === options.length ? 12 : 6}`}
+                        ref={scrollRef}
                     >
-                        <div className={`flex flex-col -translate-y-${selected > 1 ? 6 : 0}`}>
                         {
                             options.map((item, index) => {
                                 if (index === selected)
@@ -65,7 +79,6 @@ function CustomSelect({ options, onSelect })
                                     )
                             })
                         }
-                        </div>
                     </div>
                 :
                     <div className="relative flex flex-col overflow-hidden h-6" 

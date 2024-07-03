@@ -39,9 +39,10 @@ function Panel() {
     }
 
     const onBankColorsChange = (event) => {
-        const newColorset = event.target.options[event.target.selectedIndex].index;
-        setColorset(newColorset);
-        dispatchBankColors(newColorset);
+        const newColorset = event.target.getAttribute('index');
+        console.log(newColorset);
+        // setColorset(newColorset);
+        // dispatchBankColors(newColorset);
     }
 
     const onMirColorsChange = (event) => {
@@ -86,17 +87,10 @@ function Panel() {
             </div>
             <div className="gap-3">
                 <div>Логотип</div>
-                <select onChange={onBankColorsChange} value={colorset + 1}>
-                    { bankLogoMinimal ? 
-                        colors.minimal.map((item, index) => {
-                            return <option key={index} index={index}>{index + 1}</option>
-                        })
-                    : 
-                        colors.full.map((item, index) => {
-                            return <option key={index} index={index}>{index + 1}</option>
-                        })
-                    }
-                </select>
+                <CustomSelect 
+                    options={bankLogoMinimal ? colors.minimal : colors.full} 
+                    onSelect={onBankColorsChange}
+                />
             </div>
             <div className="gap-3">
                 <div>Банковская система</div>
