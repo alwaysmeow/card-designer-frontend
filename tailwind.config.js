@@ -13,6 +13,11 @@ module.exports = {
     'text-dark',
     'rounded-br-xl',
     'rounded-bl-xl',
+    '-translate-y-6',
+    '-translate-y-12',
+    '-translate-y-18',
+    '-translate-y-24',
+    '-translate-y-30',
   ],
   theme: {
     fill: {
@@ -27,7 +32,14 @@ module.exports = {
     aspectRatio: {
       card: '85.6 / 54',
     },
-    extend: {},
+    extend: {
+      translate: {
+        '18': '4.5rem',
+      },
+      height: {
+        '18': '4.5rem',
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),

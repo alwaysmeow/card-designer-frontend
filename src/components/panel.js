@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+
 import { switchBankLogoSide, switchBankLogoMinimal, setBankLogoColors, setMirLogoColors } from '../store/templateSlice';
 import { setStatus } from "../store/statusSlice";
 import colors from "../tools/colors";
 import prepareData from "../tools/prepareData";
 import { sendDesignData } from '../tools/requests'
+import CustomSelect from "./customSelect";
 
 function Panel() {
     const dispatch = useDispatch();
@@ -70,7 +72,7 @@ function Panel() {
     }
 
     return (
-        <div className="flex justify-center gap-5 bg-grey p-5">
+        <div className="flex justify-center gap-5 bg-grey p-5 text-dark h-40">
             <div className="gap-3">
                 <div>Положение логотипа</div>
                 <select onChange={onSideChange}>
