@@ -30,6 +30,7 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
 
     const handleSelect = (event) => {
         const newSelected = event.target.getAttribute('index');
+        console.log(selected, newSelected);
         onSelect(event);
         if (newSelected != selected)
             onChange(event);
@@ -48,12 +49,12 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
             {
                 focus ?
                     <div 
-                        className={`flex flex-col overflow-scroll h-${options.length > 2 ? 18 : 12 } rounded-md -translate-y-${selected === 0 ? 0 : Number(selected) + 1 === options.length && options.length > 2 ? 12 : 6}`}
+                        className={`flex flex-col overflow-scroll h-${options.length > 2 ? 18 : 12 } rounded-md -translate-y-${selected == 0 ? 0 : 1 + Number(selected) === options.length && options.length > 2 ? 12 : 6}`}
                         ref={scrollRef}
                     >
                         {
                             options.map((item, index) => {
-                                if (index === selected)
+                                if (index == selected)
                                     return (
                                         <div 
                                             key={index} 
@@ -95,8 +96,10 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
                                     if (item !== "none")
                                         return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
                                 })
-                            :
-                                <div className="px-2">{selected + 1}</div>
+                            : type === "text" ?
+                                <div className="px-2">{ options[selected] }</div>
+                            : 
+                                <></>
                         }
                         <FaChevronDown className="absolute top-0 right-0 h-3 my-1.5 mx-0.5" color="#323e48"/>
                     </div>
