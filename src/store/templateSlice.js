@@ -6,9 +6,9 @@ const templateSlice = createSlice({
         bankLogoSide: 'left',
         bankLogoMinimal: false,
         bankLogoColors: {
-            bg: 'none',
             letter: 'pink',
             text: 'dark',
+            bg: 'none',
         },
         mirLogoColors: {
             main: "default",

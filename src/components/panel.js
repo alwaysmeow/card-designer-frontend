@@ -19,34 +19,39 @@ function Panel() {
     const cropData = useSelector((state) => state.crop.cropData)
     const image = useSelector((state) => state.crop.image)
 
-    const [colorset, setColorset] = useState(0);
+    const [bankColorset, setBankColorset] = useState(0);
+    const [mirColorset, setMirColorset] = useState(0);
+    const [bankLogoSideIndex, setBankLogoSideIndex] = useState(0);
 
     const onSideChange = () => {
         dispatch(switchBankLogoSide());
+        setBankLogoSideIndex(1 - bankLogoSideIndex);
     }
 
-    const dispatchBankColors = (colorset) => {
+    const dispatchBankColors = (bankColorset) => {
         if (bankLogoMinimal)
-            dispatch(setBankLogoColors(colors.minimal[colorset]));
+            dispatch(setBankLogoColors(colors.minimal[bankColorset]));
         else
-            dispatch(setBankLogoColors(colors.full[colorset]));
+            dispatch(setBankLogoColors(colors.full[bankColorset]));
     }
 
     const onMinimizationClick = () => {
+        console.log('mini');
         dispatch(switchBankLogoMinimal());
-        setColorset(0);
+        setBankColorset(0);
         dispatchBankColors(0);
     }
 
     const onBankColorsChange = (event) => {
         const newColorset = event.target.getAttribute('index');
-        setColorset(newColorset);
+        setBankColorset(newColorset);
         dispatchBankColors(newColorset);
     }
 
     const onMirColorsChange = (event) => {
-        const optionIndex = event.target.getAttribute('index');
-        dispatch(setMirLogoColors(colors.system[optionIndex]));
+        const newColorset = event.target.getAttribute('index');
+        setMirColorset(newColorset);
+        dispatch(setMirLogoColors(colors.system[newColorset]));
     }
 
     const onReady = () => {
@@ -76,6 +81,8 @@ function Panel() {
             <div className="gap-3">
                 <div>Положение логотипа</div>
                 <CustomSelect 
+                    type="text"
+                    selected={bankLogoSideIndex}
                     options={['Слева', 'Cправа']}
                     onChange={onSideChange}
                 />
@@ -87,18 +94,22 @@ function Panel() {
             <div className="gap-3">
                 <div>Логотип</div>
                 <CustomSelect 
+                    type="color"
+                    selected={bankColorset}
                     options={bankLogoMinimal ? colors.minimal : colors.full} 
                     onSelect={onBankColorsChange}
                 />
             </div>
             <div className="gap-3">
                 <div>Банковская система</div>
-                <CustomSelect 
-                    options={colors.system} 
+                <CustomSelect
+                    type="color"
+                    selected={mirColorset}
+                    options={colors.system}
                     onSelect={onMirColorsChange}
                 />
             </div>
-            <button className="min-w-max text-white bg-pink p-1 pr-4 pl-4 rounded-full hover:bg-opacity-80"
+            <button className="text-white bg-pink p-1 pr-4 pl-4 my-auto rounded-full hover:bg-opacity-80"
                 onClick={onReady}
             >
                 Готово

@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-function CustomSelect({ options, onSelect, onChange })
+function CustomSelect({ type, selected, options, onSelect, onChange })
 {
     const [focus, setFocus] = useState(false);
-    const [selected, setSelect] = useState(0);
     const containerRef = useRef(null);
     const scrollRef = useRef(null);
 
@@ -30,16 +29,11 @@ function CustomSelect({ options, onSelect, onChange })
         onChange = () => {};
 
     const handleSelect = (event) => {
+        const newSelected = event.target.getAttribute('index');
         onSelect(event);
-        if (event.target.getAttribute('index') != selected)
+        if (newSelected != selected)
             onChange(event);
-        setSelect(Number(event.target.getAttribute('index')));
         setFocus(false);
-    }
-
-    const scrollTo = (position) => {
-        if (scrollRef.current)
-            scrollRef.current.scrollTop = position
     }
 
     const autoScroll = () => {
@@ -54,7 +48,7 @@ function CustomSelect({ options, onSelect, onChange })
             {
                 focus ?
                     <div 
-                        className={`flex flex-col overflow-scroll h-${options.length > 2 ? 18 : 12 } rounded-md -translate-y-${selected === 0 ? 0 : selected + 1 === options.length && options.length > 2 ? 12 : 6}`}
+                        className={`flex flex-col overflow-scroll h-${options.length > 2 ? 18 : 12 } rounded-md -translate-y-${selected === 0 ? 0 : Number(selected) + 1 === options.length && options.length > 2 ? 12 : 6}`}
                         ref={scrollRef}
                     >
                         {
@@ -68,7 +62,7 @@ function CustomSelect({ options, onSelect, onChange })
                                             className="relative px-2 text-dark bg-grey hover:bg-dark hover:text-white h-6 -translate-y-${}"
                                             onClick={handleSelect}
                                         >
-                                            {index + 1}
+                                            { index + 1 }
                                             <FaChevronUp className="absolute top-0 right-0 h-3 my-1.5 mx-0.5 fill-current"/>
                                         </div>
                                     )
@@ -81,21 +75,29 @@ function CustomSelect({ options, onSelect, onChange })
                                             className="px-2 bg-white hover:bg-dark hover:text-white h-6"
                                             onClick={handleSelect}
                                         >
-                                            {index + 1}
+                                            {
+                                                index + 1
+                                            }
                                         </div>
                                     )
                             })
                         }
                     </div>
                 :
-                    <div className="relative flex flex-col overflow-hidden h-6" 
+                    <div className="relative flex overflow-hidden h-6" 
                         onClick={() => {
                             setFocus(true);
                         }}
                     >
-                        <div className="px-2">
-                            {selected + 1}
-                        </div>
+                        {
+                            type === "color" ?
+                                Object.values(options[selected]).map((item, index) => {
+                                    if (item !== "none")
+                                        return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
+                                })
+                            :
+                                <div className="px-2">{selected + 1}</div>
+                        }
                         <FaChevronDown className="absolute top-0 right-0 h-3 my-1.5 mx-0.5" color="#323e48"/>
                     </div>
             }

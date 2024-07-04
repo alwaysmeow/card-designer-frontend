@@ -1,51 +1,51 @@
 const colors = {
     full: [
         {
-            bg: 'none',
             letter: 'pink',
             text: 'dark',
+            bg: 'none',
         },
         {
-            bg: 'none',
             letter: 'pink',
             text: 'white',
+            bg: 'none',
         },
         {
+            letter: 'pink',
+            text: 'dark',
             bg: 'white',
-            letter: 'pink',
-            text: 'dark',
         },
         {
-            bg: 'dark',
             letter: 'pink',
             text: 'white',
+            bg: 'dark',
         },
         {
-            bg: 'pink',
             letter: 'white',
             text: 'white',
+            bg: 'pink',
         },
     ],
     minimal: [
         {
+            letter: 'pink',
+            text: 'none',
             bg: 'none',
-            letter: 'pink',
-            text: 'none',
         },
         {
+            letter: 'pink',
+            text: 'none',
             bg: 'white',
-            letter: 'pink',
-            text: 'none',
         },
         {
+            letter: 'pink',
+            text: 'none',
             bg: 'dark',
-            letter: 'pink',
-            text: 'none',
         },
         {
-            bg: 'pink',
             letter: 'white',
             text: 'none',
+            bg: 'pink',
         },
     ],
     system: [

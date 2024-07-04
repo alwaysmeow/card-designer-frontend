@@ -8,6 +8,7 @@ module.exports = {
     'bg-pink',
     'bg-white',
     'bg-dark',
+    'bg-default',
     'text-pink',
     'text-white',
     'text-dark',
@@ -18,6 +19,7 @@ module.exports = {
     '-translate-y-18',
     '-translate-y-24',
     '-translate-y-30',
+    'h-18',
   ],
   theme: {
     fill: {
@@ -28,6 +30,7 @@ module.exports = {
       grey: "#f3f4f4",
       white: "#ffffff",
       dark: "#323e48",
+      default: "#10754e"
     },
     aspectRatio: {
       card: '85.6 / 54',
