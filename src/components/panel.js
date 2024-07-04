@@ -7,6 +7,7 @@ import colors from "../tools/colors";
 import prepareData from "../tools/prepareData";
 import { sendDesignData } from '../tools/requests'
 import CustomSelect from "./customSelect";
+import CustomCheck from "./customCheck";
 
 function Panel() {
     const dispatch = useDispatch();
@@ -36,7 +37,6 @@ function Panel() {
     }
 
     const onMinimizationClick = () => {
-        console.log('mini');
         dispatch(switchBankLogoMinimal());
         setBankColorset(0);
         dispatchBankColors(0);
@@ -87,7 +87,10 @@ function Panel() {
             </div>
             <div className="gap-3">
                 <div>Минимизация</div>
-                <input type="checkbox" onClick={onMinimizationClick}/>
+                <CustomCheck
+                    value={bankLogoMinimal}
+                    onSwitch={onMinimizationClick}
+                />
             </div>
             <div className="gap-3">
                 <div>Логотип</div>

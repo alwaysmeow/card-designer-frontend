@@ -20,6 +20,7 @@ module.exports = {
     '-translate-y-24',
     '-translate-y-30',
     'h-18',
+    'translate-x-6',
   ],
   theme: {
     fill: {
