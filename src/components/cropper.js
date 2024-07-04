@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import { useDispatch } from 'react-redux';
 
@@ -65,6 +65,7 @@ function Сropper() {
                             aspect={85.6/54}
                             onComplete={onCropComplete}
                             onChange={onCropChange}
+                            minHeight={150}
                         >
                             <img src = {src}/>
                         </ReactCrop>
