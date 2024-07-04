@@ -23,7 +23,7 @@ function DemoCard () {
     }, [image, cropData])
 
     return (
-        <div className="flex-col aspect-card justify-between w-96 mx-auto border-2 border-black rounded-xl overflow-hidden"
+        <div className="flex-col aspect-card justify-between w-96 mx-auto text-dark border-2 border-dark rounded-xl overflow-hidden"
             style={src ? {
                 backgroundImage: `url(${src})`, 
                 backgroundSize: 'cover', 
