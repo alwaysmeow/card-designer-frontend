@@ -17,7 +17,7 @@ function StatusOverlay() {
         return <></>
     else
         return (
-            <div className="flex flex-col justify-center items-center absolute top-0 h-full w-full bg-white bg-opacity-90" onClick={onClick}>
+            <div className="flex flex-col justify-center items-center absolute top-0 h-full w-full bg-white bg-opacity-90 z-30" onClick={onClick}>
                 <div className="flex justify-center items-center h-16 w-16 m-4">
                     {
                         status === "waiting" ?

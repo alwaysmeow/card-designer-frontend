@@ -75,42 +75,41 @@ function Panel() {
     }
 
     return (
-        <div className="flex justify-center gap-5 bg-grey p-5 text-dark h-40">
-            <div className="gap-3">
-                <div>Положение логотипа</div>
-                <CustomSelect 
-                    type="text"
-                    selected={bankLogoSideIndex}
-                    options={['Слева', 'Cправа']}
-                    onChange={onSideChange}
-                />
+        <div className="flex justify-center gap-20 bg-grey p-8 text-dark rounded-xl">
+            <div className="flex justify-center gap-10 my-auto">
+                <div className="flex flex-col gap-2">
+                    <div>Положение логотипа</div>
+                    <CustomSelect 
+                        type="text"
+                        selected={bankLogoSideIndex}
+                        options={['Слева', 'Cправа']}
+                        onChange={onSideChange}
+                    />
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                    <div>Минимизация</div>
+                    <CustomCheck
+                        value={bankLogoMinimal}
+                        onSwitch={onMinimizationClick}
+                    />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <div>Цвета логотипов</div>
+                    <CustomSelect 
+                        type="color"
+                        selected={bankColorset}
+                        options={bankLogoMinimal ? colors.minimal : colors.full} 
+                        onSelect={onBankColorsChange}
+                    />
+                    <CustomSelect
+                        type="color"
+                        selected={mirColorset}
+                        options={colors.system}
+                        onSelect={onMirColorsChange}
+                    />
+                </div>
             </div>
-            <div className="gap-3">
-                <div>Минимизация</div>
-                <CustomCheck
-                    value={bankLogoMinimal}
-                    onSwitch={onMinimizationClick}
-                />
-            </div>
-            <div className="gap-3">
-                <div>Логотип</div>
-                <CustomSelect 
-                    type="color"
-                    selected={bankColorset}
-                    options={bankLogoMinimal ? colors.minimal : colors.full} 
-                    onSelect={onBankColorsChange}
-                />
-            </div>
-            <div className="gap-3">
-                <div>Банковская система</div>
-                <CustomSelect
-                    type="color"
-                    selected={mirColorset}
-                    options={colors.system}
-                    onSelect={onMirColorsChange}
-                />
-            </div>
-            <button className="text-white bg-pink p-1 pr-4 pl-4 my-auto rounded-full hover:bg-opacity-80"
+            <button className="text-white bg-pink py-1 px-6 my-auto rounded-full hover:bg-opacity-80"
                 onClick={onReady}
             >
                 Готово

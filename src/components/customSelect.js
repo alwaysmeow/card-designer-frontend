@@ -52,7 +52,7 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
     }
 
     return (
-        <div className="bg-white h-6 rounded-md text-dark overflow-visible" ref={containerRef}>
+        <div className={`bg-white h-6 rounded-md text-dark overflow-visible z-${focus ? 20 : 10}`} ref={containerRef}>
             {
                 focus ?
                     <div 
