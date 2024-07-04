@@ -28,12 +28,19 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
     if (onChange == null)
         onChange = () => {};
 
+    const getTargetIndex = (target) => {
+        let index = target.getAttribute('index');
+        if (index)
+            return Number(index)
+        else
+            return getTargetIndex(target.parentElement)
+    }
+
     const handleSelect = (event) => {
-        const newSelected = event.target.getAttribute('index');
-        console.log(selected, newSelected);
-        onSelect(event);
+        const newSelected = getTargetIndex(event.target);
+        onSelect(newSelected);
         if (newSelected != selected)
-            onChange(event);
+            onChange(newSelected);
         setFocus(false);
     }
 
@@ -60,10 +67,20 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
                                             key={index} 
                                             value={item} 
                                             index={index}
-                                            className="relative px-2 text-dark bg-grey hover:bg-dark hover:text-white h-6 -translate-y-${}"
+                                            className="relative flex text-dark bg-grey hover:bg-dark hover:text-white h-6"
                                             onClick={handleSelect}
                                         >
-                                            { index + 1 }
+                                            {
+                                                type === "color" ?
+                                                    Object.values(options[index]).map((item, index) => {
+                                                        if (item !== "none")
+                                                            return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
+                                                    })
+                                                : type === "text" ?
+                                                    <div className="px-2">{ options[selected] }</div>
+                                                : 
+                                                    <></>
+                                            }
                                             <FaChevronUp className="absolute top-0 right-0 h-3 my-1.5 mx-0.5 fill-current"/>
                                         </div>
                                     )
@@ -73,11 +90,19 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
                                             key={index} 
                                             value={item} 
                                             index={index}
-                                            className="px-2 bg-white hover:bg-dark hover:text-white h-6"
+                                            className="flex bg-white h-6 hover:bg-dark hover:text-white"
                                             onClick={handleSelect}
                                         >
                                             {
-                                                index + 1
+                                                type === "color" ?
+                                                    Object.values(options[index]).map((item, index) => {
+                                                        if (item !== "none")
+                                                            return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
+                                                    })
+                                                : type === "text" ?
+                                                    <div className="px-2">{ options[selected] }</div>
+                                                : 
+                                                    <></>
                                             }
                                         </div>
                                     )

@@ -42,16 +42,14 @@ function Panel() {
         dispatchBankColors(0);
     }
 
-    const onBankColorsChange = (event) => {
-        const newColorset = event.target.getAttribute('index');
-        setBankColorset(newColorset);
-        dispatchBankColors(newColorset);
+    const onBankColorsChange = (index) => {
+        setBankColorset(index);
+        dispatchBankColors(index);
     }
 
-    const onMirColorsChange = (event) => {
-        const newColorset = event.target.getAttribute('index');
-        setMirColorset(newColorset);
-        dispatch(setMirLogoColors(colors.system[newColorset]));
+    const onMirColorsChange = (index) => {
+        setMirColorset(index);
+        dispatch(setMirLogoColors(colors.system[index]));
     }
 
     const onReady = () => {
