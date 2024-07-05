@@ -77,7 +77,7 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
                                                             return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
                                                     })
                                                 : type === "text" ?
-                                                    <div className="px-2">{ options[selected] }</div>
+                                                    <div className="px-2">{ options[index] }</div>
                                                 : 
                                                     <></>
                                             }
@@ -100,7 +100,7 @@ function CustomSelect({ type, selected, options, onSelect, onChange })
                                                             return <div key={index} className={`bg-${item} h-3 w-3 my-1.5 ml-1.5 border-2`}/>
                                                     })
                                                 : type === "text" ?
-                                                    <div className="px-2">{ options[selected] }</div>
+                                                    <div className="px-2">{ options[index] }</div>
                                                 : 
                                                     <></>
                                             }
