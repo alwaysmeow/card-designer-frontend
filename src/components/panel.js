@@ -53,25 +53,28 @@ function Panel() {
     }
 
     const onReady = () => {
-        const data = prepareData(
-            cropData, 
-            bankLogoColors, 
-            mirLogoColors, 
-            bankLogoMinimal, 
-            bankLogoSide
-        );
-        dispatch(setStatus("waiting"))
-        sendDesignData(image, data)
-        .then((response) => {
-            if (response.status == 200)
-                dispatch(setStatus('success'));
-            else
-                dispatch(setStatus('failure'));
-            console.log(response);
-        })
-        .catch(() => {
-            dispatch(setStatus('error'));
-        })
+        if (image != null)
+        {
+            const data = prepareData(
+                cropData, 
+                bankLogoColors, 
+                mirLogoColors, 
+                bankLogoMinimal, 
+                bankLogoSide
+            );
+            dispatch(setStatus("waiting"))
+            sendDesignData(image, data)
+            .then((response) => {
+                if (response.status == 200)
+                    dispatch(setStatus('success'));
+                else
+                    dispatch(setStatus('failure'));
+                console.log(response);
+            })
+            .catch(() => {
+                dispatch(setStatus('error'));
+            })
+        }
     }
 
     return (
