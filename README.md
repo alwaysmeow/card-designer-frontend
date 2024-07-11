@@ -4,6 +4,11 @@
 
 This project was developed during my internship at Renaissance Bank. It is a micro frontend built with React, Redux, and Tailwind, providing a design constructor for bank cards. The project collects metadata from the constructor and sends it to the backend for further processing.
 
+### Stack
+- React
+- Redux
+- Tailwind CSS
+
 ## Installation
 
 To install the project, clone the repository:
